@@ -1,17 +1,20 @@
-// MAIN.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+
 
 #include "pch.h"
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <conio.h>
+#include "AbrirIn.cpp"
+#include <fstream>
 using namespace std;
 void pausa();
+void rutaIN();
 int main()
 {
+	
 	bool bandera = false;
-	char tecla;
-	char ruta = ' ';
-
+	char tecla = ' ';
 	do {
 		system("cls");
 		cin.clear();
@@ -31,11 +34,7 @@ int main()
 		case '1':
 
 			system("cls");
-
-			cout << "---Insert Image--- .\n";
-			cout << "Inserte La ruta    .\n";
-			cin >> ruta;
-
+			rutaIN();				
 			pausa();
 
 			break;
@@ -118,6 +117,15 @@ int main()
 
 		}
 	} while (bandera != true);
+}
+void rutaIN() {
+	
+	OPEN abrir;
+	string name;
+	cout << "INGRESA LA RUTA : \n" << flush;
+	cin.get();
+	getline(cin, name);
+	abrir.separar(name);
 }
 void pausa()
 

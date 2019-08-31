@@ -54,7 +54,6 @@ public:
 		for (size_t i = 0; i < data.size(); i++)
 		{
 			vector <string>    record;
-
 			record = data[i];
 			//  Print each record
 			for (size_t j = 0; j < record.size(); j++)
@@ -74,10 +73,16 @@ public:
 			//aqui se separan por ; y linea a linea hacer metodo para abrir los archivos y guardarlos en la matriz
 			cout << endl;
 		}
-		
+		abrirConfig();
 		
 	}
 	void abrirConfig() {
+		int i = 0;
+		do
+		{
+
+			
+		} while (ArchIn[0][i]!= " ");
 
 	}
 };

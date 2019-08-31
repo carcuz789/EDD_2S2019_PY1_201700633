@@ -1,5 +1,4 @@
 
-
 #include "pch.h"
 #include <iostream>
 #include <cstdlib>
@@ -12,7 +11,6 @@ void pausa();
 void rutaIN();
 int main()
 {
-	
 	bool bandera = false;
 	char tecla = ' ';
 	do {
@@ -44,9 +42,7 @@ int main()
 		case '2':
 
 			system("cls");
-
-			cout << "Select Image.\n";
-
+			
 			pausa();
 
 			break;
@@ -58,7 +54,7 @@ int main()
 			system("cls");
 
 			cout << "Apply Filters.\n";
-
+			
 			pausa();
 
 			break;
@@ -127,10 +123,11 @@ void rutaIN() {
 	getline(cin, name);
 	abrir.separar(name);
 }
+
 void pausa()
 
 {
-
+    
 	cout << "Pulsa una tecla para continuar...";
 
 	getwchar();

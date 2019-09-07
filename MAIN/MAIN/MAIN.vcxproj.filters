@@ -18,6 +18,9 @@
     <ClInclude Include="pch.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="ABB.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -33,9 +36,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="TablDispEncade.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="ArbolABB.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

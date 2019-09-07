@@ -6,7 +6,9 @@
 #include <conio.h>
 #include "AbrirIn.cpp"
 #include <fstream>
+#include "ABB.h"
 using namespace std;
+void arbolin();
 void pausa();
 void rutaIN();
 int main()
@@ -42,7 +44,7 @@ int main()
 		case '2':
 
 			system("cls");
-			
+			arbolin();
 			pausa();
 
 			break;
@@ -52,11 +54,8 @@ int main()
 		case '3':
 
 			system("cls");
-
-			cout << "Apply Filters.\n";
-			
+			cout << "Apply Filters.\n";			
 			pausa();
-
 			break;
 
 
@@ -64,49 +63,31 @@ int main()
 		case '4':
 
 			system("cls");
-
 			cout << "Manual Editing.\n";
-
 			pausa();
-
 			break;
 
 		case '5':
 
 			system("cls");
-
 			cout << "Export Image.\n";
-
 			pausa();
-
 			break;
 
 		case '6':
 
 			system("cls");
-
 			cout << "Report .\n";
-
 			pausa();
-
 			break;
 
 		case '7':
-
 			bandera = true;
-
-
-
 			break;
-
-
-
+					   
 		default:
-
 			system("cls");
-
 			cout << "Opcion no valida.\a\n";
-
 			pausa();
 
 			break;
@@ -122,6 +103,11 @@ void rutaIN() {
 	cin.get();
 	getline(cin, name);
 	abrir.separar(name);
+}
+void arbolin() {
+	ArbolEqui arbol_e;
+	arbol_e.msain();
+	
 }
 
 void pausa()

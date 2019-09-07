@@ -6,7 +6,6 @@
 #include <string>
 #include <sstream>
 
-
 using namespace std;
 class OPEN {
 public:

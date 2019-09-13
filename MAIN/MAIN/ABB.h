@@ -10,6 +10,7 @@ using namespace std;
 
 typedef struct nodo {
 	int nro;
+	string NombreIma;
 	ListaSimp li;
 	Tlista tli;
 	vector <vector <string> > mat;
@@ -60,30 +61,31 @@ public:
 		return n;
 	}
 
-	ABB crearNodo(int x,  ListaSimp Cubo,Tlista lis, vector <vector <string> > mati)
+	ABB crearNodo(int x,  ListaSimp Cubo,Tlista lis, vector <vector <string> > mati,string nombre)
 	{
 		ABB nuevoNodo = new(struct nodo);
 		nuevoNodo->nro = x;
 		nuevoNodo->li = Cubo;
 		nuevoNodo->tli=lis;
 		nuevoNodo->mat=mati;
+		nuevoNodo->NombreIma=nombre;
 		nuevoNodo->izq = NULL;
 		nuevoNodo->der = NULL;
 
 		return nuevoNodo;
 	}
-	void insertar(ABB &arbol, int x,ListaSimp Cubo,Tlista lis, vector <vector <string> > mati)
+	void insertar(ABB &arbol, int x,ListaSimp Cubo,Tlista lis, vector <vector <string> > mati,string nombre)
 	{
 		if (arbol == NULL)
 		{
-			arbol = crearNodo(x,Cubo,lis,mati);
+			arbol = crearNodo(x,Cubo,lis,mati,nombre);
 			cout << "\n\t  Insertado..!" << endl << endl;
 		}
 		else if (x < arbol->nro) {
-			insertar(arbol->izq, x, Cubo,lis, mati);
+			insertar(arbol->izq, x, Cubo,lis, mati,nombre);
 		}			
 		else if (x > arbol->nro) {
-			insertar(arbol->der, x, Cubo,lis, mati);
+			insertar(arbol->der, x, Cubo,lis, mati,nombre);
 		}
 			
 	}
@@ -104,6 +106,7 @@ public:
 		{
 			enOrden(arbol->izq);
 			cout << arbol->nro << " ";
+			cout << arbol->NombreIma +"\n"<< endl;
 			enOrden(arbol->der);
 		}
 	}

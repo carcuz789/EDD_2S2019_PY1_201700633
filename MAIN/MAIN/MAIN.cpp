@@ -11,12 +11,13 @@ using namespace std;
 void pausa();
 void rutaIN();
 OPEN abrir;
+string ima;
 int main()
 {
 
 	bool bandera = false;
 	char tecla = ' ';
-
+	
 	do {
 		system("cls");
 		cin.clear();
@@ -47,7 +48,10 @@ int main()
 
 			system("cls");
 			cout << "====================== IMAGENES ================" << endl;
-			
+			abrir.mostrar_arbol();
+			cout << "seleccione el numero de la imagen " << endl;
+			cin >> ima;
+			// guardamos en la variable ima para trabajar con ella 
 			pausa();
 
 			break;
@@ -107,7 +111,7 @@ void rutaIN() {
 	cin.get();
 	getline(cin, name);
 	abrir.Abrir(name);
-	abrir.mostrar_arbol();
+
 	//Arbol.crearNodo(numeroNodoARB, abrir.Retornar_Lista,abrir.MatMandar);
 	//numeroNodoARB++;
 }

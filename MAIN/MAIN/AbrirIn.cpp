@@ -147,13 +147,12 @@ public:
 		//capaNo++;
 	}
 	void MandarPaquete() {
-		hoja.insertar(arbol, numerohoja, Lis,Tlista, matrizConfig);
+		hoja.insertar(arbol, numerohoja, Lis,Tlista, matrizConfig,nomb);
 		numerohoja++;
 	
 	}
 	void mostrar_arbol() {
-		hoja.verArbol(arbol,0);
-
+		hoja.enOrden(arbol);
 	}
 	
 };

@@ -1,35 +1,36 @@
 #pragma once
-
+#include "pch.h"
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 using namespace std;
 
-struct nodo {
-
-	string matriz[100][100];
-	string nombre;
+struct nodod {
+	vector <vector <string> > data;
 	int numero;
-	struct nodo *sgte;
+	string nombre;
+	struct nodod *sgte;
 };
+typedef struct nodod *Tlista;
 
-typedef struct nodo *Tlista;
 class ListaSimp {
-	void insertarInicio(Tlista &lista,string matriz1[100][100], int numero,string name)
+public:
+	void insertarInicio(Tlista &lista, vector <vector <string> > data1, int numero,string name)
 	{
 		Tlista q;
-		q = new(struct nodo);
-		q->matriz[100][100] = matriz1[100][100];
-		q->nombre = name;
+		q = new(struct nodod);
+		q->data = data1;
 		q->numero = numero;
+		q->nombre = name;
 		q->sgte = lista;
 		lista = q;
 	}
 
-	void insertarFinal(Tlista &lista, string matriz1[100][100], int numero, string name)
+	void insertarFinal(Tlista &lista, vector <vector <string> > data1, int numero,string name)
 	{
-		Tlista t, q = new(struct nodo);
+		Tlista t, q = new(struct nodod);
 
-		q->matriz[100][100] = matriz1[100][100];
+		q->data = data1;
 		q->nombre = name;
 		q->numero = numero;
 		q->sgte = NULL;
@@ -67,14 +68,14 @@ class ListaSimp {
 		return band;
 	}
 	//por si se modifica una matriz insertarla en la pos qu
-	void insertarElemento(Tlista &lista, string mat[100][100], int pos,string nombre)
+	void insertarElemento(Tlista &lista, vector <vector <string> > data1, int pos,string name)
 	{
 		Tlista q, t;
 		int i;
-		q = new(struct nodo);
-		q->matriz[100][100] = mat[100][100];
-		q->nombre = nombre;
+		q = new(struct nodod);
+		q->data = data1;
 		q->numero = pos;
+		q->nombre = name;
 		if (pos == 1)
 		{
 			q->sgte = lista;
@@ -99,7 +100,7 @@ class ListaSimp {
 		cout << "   Error...Posicion no encontrada..!" << endl;
 	}
 
-	void buscarElemento(Tlista lista, string NombCapa)
+	void buscarElemento(Tlista lista, int numero)
 	{
 		//ingresar un numero y hacer q=q->sgte hasta que llegue a la matriz
 		Tlista q = lista;
@@ -107,9 +108,10 @@ class ListaSimp {
 
 		while (q != NULL)
 		{
-			if (q->nombre == NombCapa)
+			if (q->numero == numero)
 			{
 				cout << endl << " Encontrada en posicion " << i << endl;
+				cout << "capa -> " + q->nombre<< endl;
 				band = 1;
 			}
 			q = q->sgte;
@@ -126,7 +128,9 @@ class ListaSimp {
 
 		while (lista != NULL)
 		{
-			cout << ' ' << i + 1 << ") " << lista->matriz << endl;
+			
+			cout <<  lista->numero << endl;
+			cout << lista->nombre + "\n"<< endl;
 			lista = lista->sgte;
 			i++;
 		}
@@ -160,9 +164,4 @@ class ListaSimp {
 			cout << " Lista vacia..!";
 	}
 
-	
-
-
-
-	
 };

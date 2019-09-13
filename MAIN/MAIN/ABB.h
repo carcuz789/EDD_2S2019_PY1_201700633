@@ -5,14 +5,17 @@
 #include <string>
 #include <conio.h>
 #include <fstream>
+#include "Cubo.h"
 using namespace std;
+
 typedef struct nodo {
 	int nro;
+	ListaSimp li;
+	Tlista tli;
+	vector <vector <string> > mat;
 	struct nodo *izq, *der;
-}*ABB;
+}*ABB ;
 
-int numNodos = 0; // nummero de nodos del arbol ABB
-int numK = 0, k;     //  nodos menores que un numero k ingresado
 
 
 /* ---------- Estructura de la cola ---------*/
@@ -57,26 +60,32 @@ public:
 		return n;
 	}
 
-	ABB crearNodo(int x)
+	ABB crearNodo(int x,  ListaSimp Cubo,Tlista lis, vector <vector <string> > mati)
 	{
 		ABB nuevoNodo = new(struct nodo);
 		nuevoNodo->nro = x;
+		nuevoNodo->li = Cubo;
+		nuevoNodo->tli=lis;
+		nuevoNodo->mat=mati;
 		nuevoNodo->izq = NULL;
 		nuevoNodo->der = NULL;
 
 		return nuevoNodo;
 	}
-	void insertar(ABB &arbol, int x)
+	void insertar(ABB &arbol, int x,ListaSimp Cubo,Tlista lis, vector <vector <string> > mati)
 	{
 		if (arbol == NULL)
 		{
-			arbol = crearNodo(x);
+			arbol = crearNodo(x,Cubo,lis,mati);
 			cout << "\n\t  Insertado..!" << endl << endl;
 		}
-		else if (x < arbol->nro)
-			insertar(arbol->izq, x);
-		else if (x > arbol->nro)
-			insertar(arbol->der, x);
+		else if (x < arbol->nro) {
+			insertar(arbol->izq, x, Cubo,lis, mati);
+		}			
+		else if (x > arbol->nro) {
+			insertar(arbol->der, x, Cubo,lis, mati);
+		}
+			
 	}
 
 	void preOrden(ABB arbol)
@@ -111,17 +120,22 @@ public:
 
 	void verArbol(ABB arbol, int n)
 	{
+		
 		if (arbol == NULL)
 			return;
+		//ListaSimp lis;
+		//Tlista list;
+		//lis = arbol->li;
+		//list = arbol->tli;
+		//lis.reportarLista(list);
 		verArbol(arbol->der, n + 1);
 
-		for (int i = 0; i < n; i++)
-			cout << "   ";
-
-		numNodos++;
+    	  for (int i = 0; i < n; i++)
+			cout << "   ";	
 		cout << arbol->nro << endl;
-
+		
 		verArbol(arbol->izq, n + 1);
+		
 	}
 
 	bool busquedaRec(ABB arbol, int dato)
@@ -225,16 +239,7 @@ public:
 		return arbol;
 	}
 
-	void nodosMenoresQueK(ABB arbol, int n)
-	{
-		if (arbol == NULL)
-			return;
-		nodosMenoresQueK(arbol->der, n + 1);
-		if (arbol->nro < k)
-			numK++;
-		nodosMenoresQueK(arbol->izq, n + 1);
-
-	}
+	
 
 	int contarHojas(ABB arbol)
 	{
@@ -284,6 +289,8 @@ public:
 	void msain()
 	{
 		ABB arbol = NULL;
+		ListaSimp Cubo ;
+		string config[2][5];
 		int x;
 		int op, op2;
 
@@ -298,7 +305,7 @@ public:
 			{
 			case 1:
 				cout << " Ingrese valor : ";  cin >> x;
-				insertar(arbol, x);
+				//insertar(arbol, x, Cubo, config);
 				break;
 
 			case 2:
@@ -369,17 +376,8 @@ public:
 				verArbol(espejo, 0);
 				break;
 
-			case 9:
-				verArbol(arbol, 0);
-				cout << "\n\n El numero de nodos es : ";
-				cout << numNodos;
-				break;
-
-			case 11:
-				cout << " Ingrese k: "; cin >> k;
-				nodosMenoresQueK(arbol, 0);
-				cout << " Son  " << numK << "  numeros";
-				break;
+		
+			
 
 
 			case 12:

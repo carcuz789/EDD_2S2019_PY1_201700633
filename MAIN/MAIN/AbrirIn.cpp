@@ -5,11 +5,21 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include "Cubo.h"
+#include "ABB.h"
 
 using namespace std;
 class OPEN {
-public:
-	string ArchIn[2][100];
+public:	
+	ABB arbol = NULL;
+	ArbolEqui hoja;
+	ListaSimp Lis;
+	Tlista Tlista = NULL;
+	vector <vector <string> > matrizConfig;
+	int numeroCapa,numeroNodoArb;
+	int capaNo = 0;
+	int numerohoja = 1;
+	string nomb;
 	void Abrir(string txt) {
 	   ifstream archivo(txt, ios::in);
 		char linea[128];
@@ -22,21 +32,18 @@ public:
 			{
 				archivo.getline(linea, sizeof(linea));
 				cout << linea << endl;
-
-				if ((++contador % 24) == 0)
-				{ 
-					cout << "CONTINUA...";
-					cin.get();
-				}
+				separar(linea);			
+				
 			}
 		archivo.close();
 	}
 	void separar(string text) {
-		 
+		nomb = text;
 		vector <vector <string> > data;
 		ifstream infile(text);
 		string line;
 		string str;
+		string est;
 		int estado = 0,k=0;
 		
 		//  Read the file    
@@ -58,30 +65,95 @@ public:
 			for (size_t j = 0; j < record.size(); j++)
 				if (estado == 0)
 				{
-					cout << record[j] << " ";
-					ArchIn[0][k] = record[j];
-					estado = 1;
+					cout << record[j] << " ";					
+					if (record[j]=="0")
+					{
+						string estadol = record[j],rutaconfig = record[j+1];
+						abrirConfig(estadol,rutaconfig);
+						est = 1;//para saber que los que vengan ya seran los numeros
+						estado = 1;
+						j++;
+						capaNo = 0;
+					}					
 				}
-				else
-				{
-					cout << record[j] << " ";
-					ArchIn[1][k] = record[j];
-					estado = 0;
-					k++;
+				else if(estado ==1)
+				{					
+					string esstado = record[j];
+					string rutaconfigg = record[j + 1];
+					mandarcapas(esstado,rutaconfigg);
+					j++;
+					
 				}            
 			//aqui se separan por ; y linea a linea hacer metodo para abrir los archivos y guardarlos en la matriz
-			cout << endl;
+			cout << endl;			
 		}
-		abrirConfig();
+		MandarPaquete();
 		
 	}
-	void abrirConfig() {
-		int i = 0;
-		do
-		{
+	void abrirConfig(string estado,string ruta) {
+		
+		int cont=0,estado5=0;
+		vector <vector <string> > data;
+		ifstream infile(ruta);
+		string line;
+		string str;
+		string est;
+		
 
-			
-		} while (ArchIn[0][i]!= " ");
+		//  Read the file    
+		while (getline(infile, line))
+		{
+			istringstream ss(line);
+			vector <string> record;
+
+			while (getline(ss, str, ';'))
+				record.push_back(str);
+			data.push_back(record);
+		}	
+		matrizConfig = data;
+	}
+	void mandarcapas(string numero, string ruta) {
+		vector <vector <string> > data;
+		string MatCapa[100][100];
+		ifstream infile(ruta);
+		string line;
+		string str;
+		string est;
+
+
+		//  Read the file    
+		while (getline(infile, line))
+		{
+			istringstream ss(line);
+			vector <string> record;
+
+			while (getline(ss, str, ';'))
+				record.push_back(str);
+			data.push_back(record);
+		}
+		Lis.insertarInicio(Tlista,data,capaNo,ruta);
+		capaNo++;
+//		for (size_t i = 0; i < data.size(); i++)
+	//	{
+	//		vector <string>    record;
+		//	record = data[i];
+			//  Print each record
+		//	for (size_t j = 0; j < record.size(); j++)
+			//	MatCapa[i][j]=record[j];
+			//aqui se separan por ; y linea a linea hacer metodo para abrir los archivos y guardarlos en la matriz
+			//cout << endl;
+		//}
+		//Lis.insertarElemento(lista, MatCapa, capaNo, nomb);
+		//capaNo++;
+	}
+	void MandarPaquete() {
+		hoja.insertar(arbol, numerohoja, Lis,Tlista, matrizConfig);
+		numerohoja++;
+	
+	}
+	void mostrar_arbol() {
+		hoja.verArbol(arbol,0);
 
 	}
+	
 };

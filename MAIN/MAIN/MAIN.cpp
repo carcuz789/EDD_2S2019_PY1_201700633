@@ -6,15 +6,17 @@
 #include <conio.h>
 #include "AbrirIn.cpp"
 #include <fstream>
-#include "ABB.h"
+
 using namespace std;
-void arbolin();
 void pausa();
 void rutaIN();
+OPEN abrir;
 int main()
 {
+
 	bool bandera = false;
 	char tecla = ' ';
+
 	do {
 		system("cls");
 		cin.clear();
@@ -32,9 +34,9 @@ int main()
 		{
 
 		case '1':
-
+			
 			system("cls");
-			rutaIN();				
+			rutaIN();
 			pausa();
 
 			break;
@@ -44,7 +46,8 @@ int main()
 		case '2':
 
 			system("cls");
-			arbolin();
+			cout << "====================== IMAGENES ================" << endl;
+			
 			pausa();
 
 			break;
@@ -97,18 +100,18 @@ int main()
 }
 void rutaIN() {
 	
-	OPEN abrir;
+	
+	
 	string name;
 	cout << "INGRESA LA RUTA : \n" << flush;
 	cin.get();
 	getline(cin, name);
-	abrir.separar(name);
+	abrir.Abrir(name);
+	abrir.mostrar_arbol();
+	//Arbol.crearNodo(numeroNodoARB, abrir.Retornar_Lista,abrir.MatMandar);
+	//numeroNodoARB++;
 }
-void arbolin() {
-	ArbolEqui arbol_e;
-	arbol_e.msain();
-	
-}
+
 
 void pausa()
 

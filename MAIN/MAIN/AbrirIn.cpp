@@ -8,9 +8,14 @@
 #include "Cubo.h"
 #include "ABB.h"
 
+
+
 using namespace std;
 class OPEN {
 public:	
+	
+	string anterior;
+	string cadena1="",cadena2="";
 	ABB arbol = NULL;
 	ArbolEqui hoja;
 	ListaSimp Lis;
@@ -155,4 +160,51 @@ public:
 		hoja.enOrden(arbol);
 	}
 	
+	void Graficar_Arbol() {
+		std::ofstream outfile("ARBOL.txt");
+
+		outfile << "digraph BST {" << std::endl;
+		outfile <<   "node [ fontname = \" Arial \" ];" << std::endl;
+		//crear los nodos
+		
+		outfile << "No"+arbol->NombreIma+" [ label = \""+ arbol->NombreIma+"  \" ];"  << std::endl;
+				
+		outfile << "}" << std::endl;
+
+		outfile.close();
+	}
+	void arbi() {
+		hoja.verArbol(arbol,0);
+	}
+	void Imprimir_inorder() {
+		std::ofstream outfile("INORDER_TRASNVERSAL.txt");
+		outfile << "digraph G {" << std::endl;
+		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
+		enOrden(arbol, outfile);
+		outfile << cadena1 << std::endl;
+		outfile << cadena2 << std::endl;
+		outfile << "}" << std::endl;
+
+		outfile.close();
+		cadena1 = " ";
+		cadena2 = " ";
+		
+	}
+	void enOrden(ABB arbol,ofstream & file)
+	{
+		
+		
+		if (arbol != NULL)
+		{
+			enOrden(arbol->izq,file);
+			anterior = arbol->NombreIma;
+			cadena1 +=   std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];"+"\n";
+			cadena2 += std::to_string( arbol->nro) + " -> ";
+
+			
+			enOrden(arbol->der,file);
+		}
+	}
+
+    
 };

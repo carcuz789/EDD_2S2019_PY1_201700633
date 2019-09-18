@@ -10,6 +10,7 @@
 using namespace std;
 void pausa();
 void rutaIN();
+void Reportes();
 OPEN abrir;
 string ima;
 int main()
@@ -18,7 +19,8 @@ int main()
 	bool bandera = false;
 	char tecla = ' ';
 	
-	do {
+	do 
+	{
 		system("cls");
 		cin.clear();
 		cout << "------ MENU ------" << endl;
@@ -61,7 +63,8 @@ int main()
 		case '3':
 
 			system("cls");
-			cout << "Apply Filters.\n";			
+			cout << "Apply Filters.\n";	
+			abrir.arbi();
 			pausa();
 			break;
 
@@ -85,6 +88,7 @@ int main()
 
 			system("cls");
 			cout << "Report .\n";
+			Reportes();
 			pausa();
 			break;
 
@@ -115,7 +119,55 @@ void rutaIN() {
 	//Arbol.crearNodo(numeroNodoARB, abrir.Retornar_Lista,abrir.MatMandar);
 	//numeroNodoARB++;
 }
+void Reportes() {
+	char tecla=' ';
+	bool bandera = false;
+	do {
+		
+		system("cls");
+		cin.clear();
+		cout << "------ REPORTES ------" << endl;
+		cout << "1. IMPORTED IMAGES REPORT" << endl;
+		cout << "2. IMAGE LAYER REPORT" << endl;
+		cout << "3. LINEAR MATRIX REPORT" << endl;
+		cout << "4. TRAVERSAL REPORT" << endl;
+		cout << "5. FILTERS REPORT -> ALL FILTERS REPORT" << endl;
+		cout << "6. FILTERS REPORT -> INDIVIDUAL FILTER REPORT" << endl;
+		cout << "7. EXIT" << endl;
+		cin >> tecla;
+		switch (tecla)
 
+		{
+
+		case '1':
+			
+			break;
+     	case '2':
+			break;			
+		case '3':
+			break;
+		case '4':
+			abrir.Imprimir_inorder();
+			pausa();
+			system("dot -Tpng INORDER_TRANSVERSAL.txt -o INORDER_TRANSVERSAL.png");
+			break;
+		case '5':
+			break;
+		case '6':
+			break;
+		case '7':
+			bandera = true;
+			break;
+		default:
+			system("cls");
+			cout << "Opcion no valida.\a\n";
+			pausa();
+
+			break;
+
+		}
+	} while (bandera != true);
+}
 
 void pausa()
 

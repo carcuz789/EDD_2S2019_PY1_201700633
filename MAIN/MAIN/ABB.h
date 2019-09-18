@@ -258,46 +258,7 @@ public:
 		{
 			return contarHojas(arbol->izq) + contarHojas(arbol->der);
 		}
-	}
-	void bst_print_dot_null(string key, int nullcount, FILE* stream)
-	{
-		fprintf(stream, "    null%d [shape=point];\n", nullcount);
-		fprintf(stream, "    %d -> null%d;\n", key, nullcount);
-	}
-	void bst_print_dot_aux(ABB node, FILE* stream)
-	{
-		static int nullcount = 0;
-
-		if (node->izq)
-		{
-			fprintf(stream, "    %d -> %d;\n", node->NombreIma, node->izq->NombreIma);
-			bst_print_dot_aux(node->izq, stream);
-		}
-		else
-			bst_print_dot_null(node->NombreIma, nullcount++, stream);
-
-		if (node->der)
-		{
-			fprintf(stream, "    %d -> %d;\n", node->NombreIma, node->der->NombreIma);
-			bst_print_dot_aux(node->der, stream);
-		}
-		else
-			bst_print_dot_null(node->NombreIma, nullcount++, stream);
-	}
-	void bst_print_dot(ABB tree, FILE* stream)
-	{
-		fprintf(stream, "digraph BST {\n");
-		fprintf(stream, "    node [fontname=\"Arial\"];\n");
-
-		if (!tree)
-			fprintf(stream, "\n");
-		else if (!tree->der && !tree->izq)
-			fprintf(stream, "    %d;\n", tree->NombreIma);
-		else
-			bst_print_dot_aux(tree, stream);
-
-		fprintf(stream, "}\n");
-	}
+	}	
 	void menu()
 	{
 		//system("cls");

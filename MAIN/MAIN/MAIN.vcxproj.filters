@@ -21,6 +21,12 @@
     <ClInclude Include="ABB.h">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
+    <ClInclude Include="Cubo.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="CrearImagen.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

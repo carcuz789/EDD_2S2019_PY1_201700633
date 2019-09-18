@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ABB.h" />
+    <ClInclude Include="CrearImagen.h" />
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

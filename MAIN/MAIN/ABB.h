@@ -141,23 +141,23 @@ public:
 		
 	}
 
-	bool busquedaRec(ABB arbol, int dato)
+	ABB busquedaRec(ABB arbol, int dato)
 	{
 		int r = 0;   // 0 indica que lo encontre
 
 		if (arbol == NULL)
-			return r;
+			//no retorna nada
 
 		if (dato < arbol->nro)
-			r = busquedaRec(arbol->izq, dato);
+			arbol = busquedaRec(arbol->izq, dato);
 
 		else if (dato > arbol->nro)
-			r = busquedaRec(arbol->der, dato);
+			arbol = busquedaRec(arbol->der, dato);
 
 		else
 			r = 1;   // son iguales, lo encontre
 
-		return r;
+		return arbol;
 	}
 
 	ABB unirABB(ABB izq, ABB der)

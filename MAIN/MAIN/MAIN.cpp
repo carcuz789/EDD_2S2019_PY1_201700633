@@ -6,13 +6,14 @@
 #include <conio.h>
 #include "AbrirIn.cpp"
 #include <fstream>
-
+#include "ArchImagen.cpp"
 using namespace std;
 void pausa();
 void rutaIN();
 void Reportes();
 OPEN abrir;
-string ima;
+int ima;
+HTML htm;
 int main()
 {
 
@@ -53,6 +54,7 @@ int main()
 			abrir.mostrar_arbol();
 			cout << "seleccione el numero de la imagen " << endl;
 			cin >> ima;
+			abrir.ImagenSelec(ima);
 			// guardamos en la variable ima para trabajar con ella 
 			pausa();
 
@@ -80,7 +82,9 @@ int main()
 		case '5':
 
 			system("cls");
-			cout << "Export Image.\n";
+			cout << "Export Image.\n";		
+			htm.InicioHTML();
+			htm.CreateCss(abrir.BuscaParaImagen());
 			pausa();
 			break;
 

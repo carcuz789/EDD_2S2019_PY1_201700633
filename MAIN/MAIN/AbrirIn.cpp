@@ -9,11 +9,10 @@
 #include "ABB.h"
 
 
-
 using namespace std;
 class OPEN {
 public:	
-	
+	int imageSelect = 0;
 	string anterior;
 	string cadena1="",cadena2="";
 	ABB arbol = NULL;
@@ -205,6 +204,11 @@ public:
 			enOrden(arbol->der,file);
 		}
 	}
-
-    
+	ABB BuscaParaImagen() {
+		ABB arbolin = hoja.busquedaRec(arbol,imageSelect);
+		return arbolin;
+	}
+	void ImagenSelec(int num) {
+		imageSelect = num;
+	}
 };

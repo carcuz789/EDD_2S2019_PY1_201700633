@@ -3,39 +3,39 @@ position: absolute;
 top: 50%;
 left:50%;
 transform: translate(-50%, -50%);
-width: 10em;
-height: 10em;
+width: 20em;
+height: 20em;
 }
 .pixelized--heart {
 display: block;
 width: 1em;
 height: 1em;
 box-shadow:
-3em 5em #F22613,
-3em 6em #F22613,
-4em 5em #F22613,
-4em 6em #F22613,
-5em 5em #F22613,
-5em 6em #F22613,
-6em 5em #F22613,
-6em 6em #F22613,
-7em 5em #F22613,
-7em 6em #F22613,
-8em 5em #F22613,
-8em 6em #F22613,
-1em 4em #F22613,
-2em 4em #F22613,
-2em 7em #F22613,
-3em 4em #F22613,
-3em 7em #F22613,
-4em 4em #F22613,
-4em 7em #F22613,
-5em 4em #F22613,
-5em 7em #F22613,
-6em 4em #F22613,
-6em 7em #F22613,
-7em 4em #F22613,
-7em 7em #F22613,
-8em 4em #F22613,
-8em 7em #F22613;
+5em 3em  rgb(255,229,204),
+6em 3em  rgb(255,229,204),
+5em 4em  rgb(255,229,204),
+6em 4em  rgb(255,229,204),
+5em 5em  rgb(255,229,204),
+6em 5em  rgb(255,229,204),
+5em 6em  rgb(255,229,204),
+6em 6em  rgb(255,229,204),
+5em 7em  rgb(255,229,204),
+6em 7em  rgb(2,229,204),
+5em 8em  #FFE5CC,
+6em 8em  #FFE5CC,
+4em 1em  #FFE5CC,
+4em 2em  #FFE5CC,
+7em 2em  #FFE5CC,
+4em 3em  #FFE5CC,
+7em 3em  #FFE5CC,
+4em 4em  #FFE5CC,
+7em 4em  #FFE5CC,
+4em 5em  #FFE5CC,
+7em 5em  #FFE5CC,
+4em 6em  #FFE5CC,
+7em 6em  #FFE5CC,
+4em 7em  #FFE5CC,
+7em 7em  #FFE5CC,
+4em 8em  #FFE5CC,
+7em 8em  #FFE5CC;
 }

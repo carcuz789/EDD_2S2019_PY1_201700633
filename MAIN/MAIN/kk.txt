@@ -1,0 +1,7 @@
+digraph G {
+node [ fontname = " Arial " ];
+1 [ label = "Prueba1.csv  " ];
+2 [ label = "archivinnonoe.csv  " ];
+
+1 -> 2 ;
+}

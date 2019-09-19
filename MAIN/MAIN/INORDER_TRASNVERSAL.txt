@@ -1,7 +1,0 @@
-digraph G {
-node [ fontname = " Arial " ];
-1 [ label = "C:\Users\Rodrigo Carcuz\Desktop\Prueba1.csv  " ];
-2 [ label = "C:\Users\Rodrigo Carcuz\Desktop\archivinnonoe.csv  " ];
-
-1 -> 2 -> 
-}

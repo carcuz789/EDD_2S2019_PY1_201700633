@@ -17,9 +17,6 @@ typedef struct nodo {
 	struct nodo *izq, *der;
 }*ABB ;
 
-
-
-/* ---------- Estructura de la cola ---------*/
 struct nodoCola {
 	ABB ptr;
 	struct nodoCola *sgte;

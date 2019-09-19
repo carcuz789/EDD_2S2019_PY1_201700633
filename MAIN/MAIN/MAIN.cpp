@@ -114,11 +114,12 @@ void rutaIN() {
 	
 	
 	
-	string name;
-	cout << "INGRESA LA RUTA : \n" << flush;
+	string name,RUTA;
+	cout << "INGRESA EL NOMBRE DEL ARCHIVO INICIAL : \n" << flush;
 	cin.get();
 	getline(cin, name);
-	abrir.Abrir(name);
+	RUTA = "C:\\Users\\Rodrigo Carcuz\\Desktop\\" + name;
+	abrir.Abrir(RUTA);
 
 	//Arbol.crearNodo(numeroNodoARB, abrir.Retornar_Lista,abrir.MatMandar);
 	//numeroNodoARB++;
@@ -153,7 +154,8 @@ void Reportes() {
 		case '4':
 			abrir.Imprimir_inorder();
 			pausa();
-			system("dot -Tpng INORDER_TRANSVERSAL.txt -o INORDER_TRANSVERSAL.png");
+			system("dot -Tpng kk.txt -o INORDER_TRANSVERSAL.png");
+			system("INORDER_TRANSVERSAL.png");
 			break;
 		case '5':
 			break;

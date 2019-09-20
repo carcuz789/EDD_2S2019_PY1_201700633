@@ -142,19 +142,28 @@ public:
 	{
 		int r = 0;   // 0 indica que lo encontre
 
-		if (arbol == NULL)
-			//no retorna nada
+		if (arbol == NULL) {
 
+		}
+		if (dato == arbol->nro)
+		{
+			return arbol;
+		}
 		if (dato < arbol->nro)
+		{
 			arbol = busquedaRec(arbol->izq, dato);
-
+			
+		}
 		else if (dato > arbol->nro)
+		{
 			arbol = busquedaRec(arbol->der, dato);
-
+			
+		}
 		else
+		{
 			r = 1;   // son iguales, lo encontre
-
-		return arbol;
+		}
+		
 	}
 
 	ABB unirABB(ABB izq, ABB der)

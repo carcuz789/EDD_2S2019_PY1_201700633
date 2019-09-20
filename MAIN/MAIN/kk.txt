@@ -1,7 +1,8 @@
 digraph G {
+rankdir="LR";
 node [ fontname = " Arial " ];
-1 [ label = "Prueba1.csv  " ];
-2 [ label = "archivinnonoe.csv  " ];
+0 [ label = "Prueba1.csv  " ];
+1 [ label = "archivinnonoe.csv  " ];
 
-1 -> 2 ;
+0 ;1 -> 
 }

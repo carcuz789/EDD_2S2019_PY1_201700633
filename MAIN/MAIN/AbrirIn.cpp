@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include "Cubo.h"
 #include "ABB.h"
 
@@ -13,7 +14,9 @@ using namespace std;
 class OPEN {
 public:	
 	int imageSelect = 0;
+	int numerin = 0;
 	string anterior;
+	int posMandar=0;
 	string cadena1="",cadena2="", RUTA = "C:\\Users\\Rodrigo Carcuz\\Desktop\\";
 	ABB arbol = NULL;
 	ArbolEqui hoja;
@@ -22,12 +25,17 @@ public:
 	vector <vector <string> > matrizConfig;
 	int numeroCapa,numeroNodoArb;
 	int capaNo = 0;
-	int numerohoja = 1;
 	string nomb;
+	std::vector< std::string > lista;
+	std::vector< std::string > lista2;
 	void Abrir(string txt) {
+		
 	   ifstream archivo(txt, ios::in);
+	   string lin;
 		char linea[128];
 		long contador = 0L;
+		int cont=0;
+
 
 		if (archivo.fail())
 			cerr << "Error al abrir el archivo" << endl;
@@ -41,13 +49,43 @@ public:
 				}
 				else
 				{
-					separar(linea);
+					lin = linea;
+					lista2.push_back(lin);
+					lista.push_back(lin);
+					//separar(linea)
+					numerin++;
 				}
 							
 				
 			}
 		archivo.close();
+		iniciOrden();
 	}
+	void iniciOrden()
+	{
+		int j=0,p= numerin-1 ;
+		std::sort(lista.begin(), lista.end());
+		
+		 do
+		 {
+			if (lista[p] == lista2[j])
+			{
+				posMandar = j;
+				separar(lista[p]);				
+				p--;
+				j = 0;
+			}
+			else
+			{
+				j++;
+			}			
+			
+		 } while (p != -1);
+			
+			
+		
+	}
+	
 	void separar(string text) {
 		nomb = text;
 		vector <vector <string> > data;
@@ -98,7 +136,7 @@ public:
 			//aqui se separan por ; y linea a linea hacer metodo para abrir los archivos y guardarlos en la matriz
 			cout << endl;			
 		}
-		MandarPaquete();
+		MandarHojaARB();//mando la hoja y el numero
 		
 	}
 	void abrirConfig(string estado,string ruta) {
@@ -158,11 +196,15 @@ public:
 		//Lis.insertarElemento(lista, MatCapa, capaNo, nomb);
 		//capaNo++;
 	}
-	void MandarPaquete() {
-		hoja.insertar(arbol, numerohoja, Lis,Tlista, matrizConfig,nomb);
-		numerohoja++;
+	void MandarHojaARB() {
+	     
+		
+		hoja.insertar(arbol,posMandar , Lis,Tlista, matrizConfig,nomb);
+		
 	
 	}
+
+	
 	void mostrar_arbol() {
 		hoja.enOrden(arbol);
 	}
@@ -186,6 +228,7 @@ public:
 	void Imprimir_inorder() {
 		std::ofstream outfile("kk.txt");
 		outfile << "digraph G {" << std::endl;
+		outfile << "rankdir=\"LR\";" << std::endl;
 		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
 		enOrden(arbol);
 		outfile << cadena1 << std::endl;
@@ -229,6 +272,7 @@ public:
 	void Imprimir_preorder() {
 		std::ofstream outfile("preord.txt");
 		outfile << "digraph G {" << std::endl;
+		outfile << "rankdir=\"LR\";" << std::endl;
 		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
 		preOrden(arbol);
 		outfile << cadena1 << std::endl;

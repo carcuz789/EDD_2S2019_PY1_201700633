@@ -58,9 +58,19 @@ public:
 						//no hace nada por que es un espacio en blanco
 					}
 					else {
-						string hex = Conversion(record[j]);
-						string manda = std::to_string(j) + "em " + std::to_string(i) + "em  "+"#"+ hex+",";
-						outfile << manda << std::endl;
+						if (tlista->sgte!=NULL)
+						{
+							string hex = Conversion(record[j]);
+							string manda = std::to_string(j) + "em " + std::to_string(i) + "em  " + "#" + hex + ",";
+							outfile << manda << std::endl;
+						}
+						else
+						{
+							string hex = Conversion(record[j]);
+							string manda = std::to_string(j) + "em " + std::to_string(i) + "em  " + "#" + hex + ";";
+							outfile << manda << std::endl;
+						}
+						
 
 					}
 					

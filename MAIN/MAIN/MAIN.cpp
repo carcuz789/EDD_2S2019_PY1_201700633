@@ -85,6 +85,7 @@ int main()
 			cout << "Export Image.\n";		
 			htm.InicioHTML();
 			htm.CreateCss(abrir.BuscaParaImagen());
+			system("IMAGEN.html");
 			pausa();
 			break;
 

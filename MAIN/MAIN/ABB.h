@@ -123,11 +123,7 @@ public:
 		
 		if (arbol == NULL)
 			return;
-		//ListaSimp lis;
-		//Tlista list;
-		//lis = arbol->li;
-		//list = arbol->tli;
-		//lis.reportarLista(list);
+		
 		verArbol(arbol->der, n + 1);
 
     	  for (int i = 0; i < n; i++)

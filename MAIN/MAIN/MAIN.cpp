@@ -7,13 +7,16 @@
 #include "AbrirIn.cpp"
 #include <fstream>
 #include "ArchImagen.cpp"
+#include "DoblementeEnlazada.h"
 using namespace std;
 void pausa();
 void rutaIN();
 void Reportes();
+void filtros();
 OPEN abrir;
 int ima;
 HTML htm;
+listina hola;
 int main()
 {
 
@@ -66,7 +69,7 @@ int main()
 
 			system("cls");
 			cout << "Apply Filters.\n";	
-			abrir.arbi();
+			filtros();
 			pausa();
 			break;
 
@@ -76,6 +79,7 @@ int main()
 
 			system("cls");
 			cout << "Manual Editing.\n";
+			abrir.ArbolConsola();
 			pausa();
 			break;
 
@@ -83,12 +87,11 @@ int main()
 
 			system("cls");
 			cout << "Export Image.\n";		
-			htm.InicioHTML();
 			htm.CreateCss(abrir.BuscaParaImagen());
 			system("IMAGEN.html");
 			pausa();
 			break;
-
+			
 		case '6':
 
 			system("cls");
@@ -120,7 +123,7 @@ void rutaIN() {
 	cin.get();
 	getline(cin, name);
 	RUTA = "C:\\Users\\Rodrigo Carcuz\\Desktop\\" + name;
-	abrir.Abrir(RUTA);
+	abrir.separar(RUTA);
 
 	//Arbol.crearNodo(numeroNodoARB, abrir.Retornar_Lista,abrir.MatMandar);
 	//numeroNodoARB++;
@@ -146,6 +149,9 @@ void Reportes() {
 		{
 
 		case '1':
+			abrir.Graficar_Arbol();			
+			system("dot -Tpng ARBOL.txt -o ARBOL.png");
+			system("ARBOL.png");
 			
 			break;
      	case '2':
@@ -154,11 +160,21 @@ void Reportes() {
 			break;
 		case '4':
 			abrir.Imprimir_inorder();
-			pausa();
 			system("dot -Tpng kk.txt -o INORDER_TRANSVERSAL.png");
 			system("INORDER_TRANSVERSAL.png");
+			abrir.Imprimir_preorder();
+			system("dot -Tpng preord.txt -o PREORDEN_TRANSVERSAL.png");
+			system("PREORDEN_TRANSVERSAL.png");
+			abrir.Imprimir_postorden();
+			system("dot -Tpng postorden.txt -o POSTORDEN_TRANSVERSAL.png");
+			system("POSTORDEN_TRANSVERSAL.png");
+			pausa();			
 			break;
 		case '5':
+			hola.MostrarD();
+			//Circular.txt
+			system("dot -Tpng Circular.txt -o TodosLosFiltros.png");
+			system("TodosLosFiltros.png");
 			break;
 		case '6':
 			break;
@@ -175,7 +191,61 @@ void Reportes() {
 		}
 	} while (bandera != true);
 }
+void filtros() {
+	char tecla = ' ';
+	bool bandera = false;
+	do {
 
+		system("cls");
+		cin.clear();
+		cout << "------ FILTROS ------" << endl;
+		cout << "1. NEGATIVO" << endl;
+		cout << "2. GRAYSCALE" << endl;
+		cout << "3. MIRROR" << endl;
+		cout << "4. COLLAGE" << endl;
+		cout << "5. MOSAIC" << endl;
+		cout << "6. EXIT" << endl;
+		
+		cin >> tecla;
+		switch (tecla)
+
+		{
+
+		case '1':
+			htm.FiltroNEGATi(abrir.BuscaParaImagen());
+			system("FiltroNEGA.html");
+			hola.Insertar("NEGATIVO",ima);
+			break;
+		case '2':
+			htm.FiltroBlack(abrir.BuscaParaImagen());
+			system("FiltroByN.html");
+			hola.Insertar("GRAYSCALE", ima);
+			break;
+		case '3':
+			htm.CreateInvert(abrir.BuscaParaImagen());
+			system("Invert.html");
+			hola.Insertar("MIRROR", ima);
+			break;
+		case '4':	
+			hola.Insertar("MOSAIC", ima);
+			break;
+		case '5':
+			hola.Insertar("MIRROR", ima);
+			break;
+		case '6':
+			bandera = true;
+			break;
+		
+		default:
+			system("cls");
+			cout << "Opcion no valida.\a\n";
+			pausa();
+
+			break;
+
+		}
+	} while (bandera != true);
+}
 void pausa()
 
 {

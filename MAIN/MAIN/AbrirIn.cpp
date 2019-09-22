@@ -15,7 +15,7 @@ class OPEN {
 public:	
 	int imageSelect = 0;
 	int numerin = 0;
-	string anterior;
+	string anterior,concaARbol1,concaArbol2;
 	int posMandar=0;
 	string cadena1="",cadena2="", RUTA = "C:\\Users\\Rodrigo Carcuz\\Desktop\\";
 	ABB arbol = NULL;
@@ -25,42 +25,10 @@ public:
 	vector <vector <string> > matrizConfig;
 	int numeroCapa,numeroNodoArb;
 	int capaNo = 0;
-	string nomb;
+	string nomb,nomb1="";
 	std::vector< std::string > lista;
 	std::vector< std::string > lista2;
-	void Abrir(string txt) {
-		
-	   ifstream archivo(txt, ios::in);
-	   string lin;
-		char linea[128];
-		long contador = 0L;
-		int cont=0;
-
-
-		if (archivo.fail())
-			cerr << "Error al abrir el archivo" << endl;
-		else
-			while (!archivo.eof())
-			{
-				archivo.getline(linea, sizeof(linea));
-				cout << linea << endl;
-				if (archivo.eof()) {
-					
-				}
-				else
-				{
-					lin = linea;
-					lista2.push_back(lin);
-					lista.push_back(lin);
-					//separar(linea)
-					numerin++;
-				}
-							
-				
-			}
-		archivo.close();
-		iniciOrden();
-	}
+	
 	void iniciOrden()
 	{
 		int j=0,p= numerin-1 ;
@@ -71,9 +39,12 @@ public:
 			if (lista[p] == lista2[j])
 			{
 				posMandar = j;
-				separar(lista[p]);				
+				nomb1 = lista[p];
+				//separar(lista[p]);				
 				p--;
 				j = 0;
+				
+				MandarHojaARB();
 			}
 			else
 			{
@@ -89,7 +60,7 @@ public:
 	void separar(string text) {
 		nomb = text;
 		vector <vector <string> > data;
-		ifstream infile(RUTA + text);
+		ifstream infile( text);
 		string line;
 		string str;
 		string est;
@@ -101,7 +72,7 @@ public:
 			istringstream ss(line);
 			vector <string> record;
 
-			while (getline(ss, str, ';'))
+			while (getline(ss, str, ','))
 				record.push_back(str);
 			data.push_back(record);
 		}
@@ -123,21 +94,26 @@ public:
 						estado = 1;
 						j++;
 						capaNo = 0;
+						
 					}					
 				}
 				else if(estado ==1)
 				{					
 					string esstado = record[j];
 					string rutaconfigg = record[j + 1];
+					lista.push_back(rutaconfigg);
+					lista2.push_back(rutaconfigg);
+					numerin++;
 					mandarcapas(esstado,rutaconfigg);
+					
 					j++;
 					
 				}            
 			//aqui se separan por ; y linea a linea hacer metodo para abrir los archivos y guardarlos en la matriz
 			cout << endl;			
 		}
-		MandarHojaARB();//mando la hoja y el numero
-		
+	   //	MandarHojaARB();//mando la hoja y el numero
+		iniciOrden();
 	}
 	void abrirConfig(string estado,string ruta) {
 		
@@ -155,7 +131,7 @@ public:
 			istringstream ss(line);
 			vector <string> record;
 
-			while (getline(ss, str, ';'))
+			while (getline(ss, str, ','))
 				record.push_back(str);
 			data.push_back(record);
 		}	
@@ -163,7 +139,6 @@ public:
 	}
 	void mandarcapas(string numero, string ruta) {
 		vector <vector <string> > data;
-		string MatCapa[100][100];
 		string nomb = ruta;
 		ifstream infile(RUTA + ruta);
 		string line;
@@ -177,7 +152,7 @@ public:
 			istringstream ss(line);
 			vector <string> record;
 
-			while (getline(ss, str, ';'))
+			while (getline(ss, str, ','))
 				record.push_back(str);
 			data.push_back(record);
 		}
@@ -196,11 +171,9 @@ public:
 		//Lis.insertarElemento(lista, MatCapa, capaNo, nomb);
 		//capaNo++;
 	}
-	void MandarHojaARB() {
-	     
+	void MandarHojaARB() {    
 		
-		hoja.insertar(arbol,posMandar , Lis,Tlista, matrizConfig,nomb);
-		
+		hoja.insertar(arbol,posMandar , Lis,Tlista, matrizConfig,nomb1);
 	
 	}
 
@@ -211,18 +184,44 @@ public:
 	
 	void Graficar_Arbol() {
 		std::ofstream outfile("ARBOL.txt");
-
 		outfile << "digraph BST {" << std::endl;
-		outfile <<   "node [ fontname = \" Arial \" ];" << std::endl;
-		//crear los nodos
-		
-		outfile << "No"+arbol->NombreIma+" [ label = \""+ arbol->NombreIma+"  \" ];"  << std::endl;
-				
+		outfile << " rankdir=TB" << std::endl;
+		outfile <<   "node [shape = record, style=filled, fillcolor=seashell2,width=0.7,height=0.2];" << std::endl;
+		//crear los nodos	
+		verArbol(arbol, 0);
+		outfile <<concaARbol1 << std::endl;
+		outfile << concaArbol2 << std::endl;
 		outfile << "}" << std::endl;
 
 		outfile.close();
 	}
-	void arbi() {
+	void verArbol(ABB arbol, int n)
+	{
+
+		if (arbol == NULL)
+			return;
+
+		verArbol(arbol->der, n + 1);
+		//nodo20 [ label ="<C0>|20|<C1>"];
+		concaARbol1 += std::to_string(arbol->nro) + " [ label = \" <C0>|" + arbol->NombreIma + " |<C1> \" ];" + "\n";				
+	   
+				
+		//cout << arbol->nro << endl;
+		
+		
+		verArbol(arbol->izq, n + 1);
+		if (arbol->izq!=NULL)
+		{
+			concaArbol2 += std::to_string(arbol->nro) + "->" + std::to_string(arbol->izq->nro) + ";" + "\n";
+		}
+		if (arbol->der!=NULL)
+		{
+			concaArbol2 += std::to_string(arbol->nro) + "->" + std::to_string(arbol->der->nro) + ";" + "\n";
+		}
+		
+		
+	}
+	void ArbolConsola() {
 		hoja.verArbol(arbol,0);
 	}
 	void Imprimir_inorder() {
@@ -231,6 +230,8 @@ public:
 		outfile << "rankdir=\"LR\";" << std::endl;
 		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
 		enOrden(arbol);
+		cadena1 += "9999999 [ label = \"  FIN    \" ]; \n";
+		cadena2 += "9999999 ; ";
 		outfile << cadena1 << std::endl;
 		outfile << cadena2 << std::endl;
 		outfile << "}" << std::endl;
@@ -250,7 +251,7 @@ public:
 				if (arbol->der == NULL)
 				{
 					cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
-					cadena2 += std::to_string(arbol->nro) + " ;";
+					cadena2 += std::to_string(arbol->nro) + " ->";					
 				}
 				else
 				{
@@ -265,9 +266,8 @@ public:
 				cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
 				cadena2 += std::to_string(arbol->nro) + " -> ";
 				enOrden(arbol->der);
-			}
-			
-		}
+			}			
+		}		
 	}
 	void Imprimir_preorder() {
 		std::ofstream outfile("preord.txt");
@@ -275,6 +275,8 @@ public:
 		outfile << "rankdir=\"LR\";" << std::endl;
 		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
 		preOrden(arbol);
+		cadena1 += "9999999 [ label = \"  FIN    \" ]; \n";
+		cadena2 += "9999999 ; ";
 		outfile << cadena1 << std::endl;
 		outfile << cadena2 << std::endl;
 		outfile << "}" << std::endl;
@@ -286,32 +288,37 @@ public:
 	{
 		if (arbol != NULL)
 		{
-			if (arbol->izq == NULL)
-			{
-				if (arbol->der == NULL)
-				{
-					cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
-					cadena2 += std::to_string(arbol->nro) + " ;";
-				}
-				else
-				{
-					cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
-					cadena2 += std::to_string(arbol->nro) + " -> ";
-					
-				}
-
-			}
-			else
-			{
-				cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
-				cadena2 += std::to_string(arbol->nro) + " -> ";
-				
-			}
+			cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
+			cadena2 += std::to_string(arbol->nro) + " -> ";
 			preOrden(arbol->izq);
 			preOrden(arbol->der);
 		}
 	}
-
+	void Imprimir_postorden() {
+		std::ofstream outfile("postorden.txt");
+		outfile << "digraph G {" << std::endl;
+		outfile << "rankdir=\"LR\";" << std::endl;
+		outfile << "node [ fontname = \" Arial \" ];" << std::endl;
+		postOrden(arbol);
+		cadena1 += "9999999 [ label = \"  FIN    \" ]; \n";
+		cadena2 += "9999999 ; ";
+		outfile << cadena1 << std::endl;
+		outfile << cadena2 << std::endl;
+		outfile << "}" << std::endl;
+		outfile.close();
+		cadena1 = " ";
+		cadena2 = " ";
+	}
+	void postOrden(ABB arbol)
+	{
+		if (arbol != NULL)
+		{
+			enOrden(arbol->izq);
+			enOrden(arbol->der);
+			cadena1 += std::to_string(arbol->nro) + " [ label = \"" + arbol->NombreIma + "  \" ];" + "\n";
+			cadena2 += std::to_string(arbol->nro) + " -> ";
+		}
+	}
 	ABB BuscaParaImagen() {
 		ABB arbolin = hoja.busquedaRec(arbol,imageSelect);
 		return arbolin;

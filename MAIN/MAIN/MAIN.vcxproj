@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="ABB.h" />
     <ClInclude Include="Cubo.h" />
+    <ClInclude Include="DoblementeEnlazada.h" />
+    <ClInclude Include="Indexada.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

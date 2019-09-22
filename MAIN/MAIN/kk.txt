@@ -1,8 +1,0 @@
-digraph G {
-rankdir="LR";
-node [ fontname = " Arial " ];
-0 [ label = "Prueba1.csv  " ];
-1 [ label = "archivinnonoe.csv  " ];
-
-0 ;1 -> 
-}

@@ -22,6 +22,7 @@ public:
 	ArbolEqui hoja;
 	ListaSimp Lis;
 	Tlista Tlista = NULL;
+	
 	vector <vector <string> > matrizConfig;
 	int numeroCapa,numeroNodoArb;
 	int capaNo = 0;
@@ -194,6 +195,53 @@ public:
 		outfile << "}" << std::endl;
 
 		outfile.close();
+	}
+	void reporteCapas(ABB arbol, int nocapa){
+		//CAPAS.TXT ->MIN
+		Tlista = arbol->tli;
+		vector <vector <string> > data ;
+
+		std::ofstream outfile("capas.txt");
+		outfile << "digraph so{" << std::endl;
+		outfile << " rankdir=LR;" << std::endl;
+		outfile << " subgraph cluster0 {" << std::endl;
+		outfile << " rank = same{ Array notes }" << std::endl;
+		outfile << " color = white;" << std::endl;
+		
+			
+			do
+			{
+				if (Tlista->numero==nocapa)
+				{
+					data = Tlista->data;
+					Tlista = Tlista->sgte;
+				}	
+				else
+				{
+					Tlista = Tlista->sgte;
+				}
+				
+			} while (Tlista!=NULL);
+			for (int i = 0; i < data.size(); i++)
+			{
+				vector <string>    record;
+				record = data[i];
+				concaARbol1 += std::to_string(i) +"[ shape = record, label = \"{ ";
+				
+				
+				//  Print each record
+				for (int j = 0; j < record.size(); j++)
+				{
+					string celda = record[j];					
+					concaARbol1 += celda + "           |";
+				}
+				concaARbol1 += "}\"] \n ;";
+			}
+		outfile << concaARbol1 << std::endl;		
+		outfile << " } " << std::endl;
+		outfile << " nodesep = .0741; }" << std::endl;
+		concaARbol1 = "";
+		
 	}
 	void verArbol(ABB arbol, int n)
 	{

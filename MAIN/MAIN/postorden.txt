@@ -1,0 +1,11 @@
+digraph G {
+rankdir="LR";
+node [ fontname = " Arial " ];
+ 0 [ label = "fondo.csv  " ];
+1 [ label = "finn.csv  " ];
+3 [ label = "bmo.csv  " ];
+2 [ label = "jake.csv  " ];
+9999999 [ label = "  FIN    " ]; 
+
+ 0 -> 1 ->3 ->2 -> 9999999 ; 
+}

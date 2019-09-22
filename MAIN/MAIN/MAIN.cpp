@@ -154,7 +154,10 @@ void Reportes() {
 			system("ARBOL.png");
 			
 			break;
-     	case '2':
+     	case '2':			
+			abrir.reporteCapas(abrir.BuscaParaImagen(),ima);
+			system("dot -Tpng capas.txt -o CAPAS.png");
+			system("CAPAS.png");
 			break;			
 		case '3':
 			break;

@@ -151,7 +151,7 @@ public:
 				}
 				else if (celda=="pixel_height") 
 				{
-					pixel_height = "1";
+					pixel_height ="1";
 				}
 			}
 

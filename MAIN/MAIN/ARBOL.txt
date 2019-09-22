@@ -1,13 +1,11 @@
 digraph BST {
  rankdir=TB
 node [shape = record, style=filled, fillcolor=seashell2,width=0.7,height=0.2];
-3 [ label = " <C0>|bmo.csv |<C1> " ];
-2 [ label = " <C0>|jake.csv |<C1> " ];
-1 [ label = " <C0>|finn.csv |<C1> " ];
-0 [ label = " <C0>|fondo.csv |<C1> " ];
+2 [ label = " <C0>|capa2.csv |<C1> " ];
+1 [ label = " <C0>|capa1.csv |<C1> " ];
+0 [ label = " <C0>|capa0.csv |<C1> " ];
 
-0->1;
-2->0;
-2->3;
+1->0;
+2->1;
 
 }

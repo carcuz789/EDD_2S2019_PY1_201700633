@@ -232,8 +232,16 @@ public:
 				//  Print each record
 				for (int j = 0; j < record.size(); j++)
 				{
-					string celda = record[j];					
-					concaARbol1 += celda + "           |";
+					string celda = record[j];	
+					if (celda=="x")
+					{
+						concaARbol1 +=  "-----------|";
+					}
+					else
+					{
+						concaARbol1 += celda + "|";
+					}
+					
 				}
 				concaARbol1 += "}\"] \n ;";
 			}
